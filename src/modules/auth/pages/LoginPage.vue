@@ -3,11 +3,14 @@ import AppButton from '@/components/ui/AppButton.vue'
 import AppInput from '@/components/ui/AppInput.vue'
 import AuthLayout from '@/layout/AuthLayout.vue'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
 const errorMsg = ref('')
+
+const router = useRouter()
 
 async function handleLogin() {
   errorMsg.value = ''
@@ -23,6 +26,10 @@ async function handleLogin() {
   await new Promise((r) => setTimeout(r, 1400))
   loading.value = false
   // router.push('/dashboard')
+}
+
+function goToDashboard() {
+  router.push({ name: 'Dashboard' })
 }
 </script>
 
@@ -108,6 +115,7 @@ async function handleLogin() {
         :disabled="loading"
         class="w-full justify-center mt-2"
         style="box-shadow: 0 4px 16px rgba(31, 122, 62, 0.3)"
+        @click="goToDashboard"
       >
         Se connecter
       </AppButton>
